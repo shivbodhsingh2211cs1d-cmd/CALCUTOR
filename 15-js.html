@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    input[type="text"] {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-right: 5px;
+      padding: 5px 10px;
+    }
+
+    #output {
+      border: 1px solid #000;
+      width: 95%;
+      height: 100px;
+      margin-top: 10px;
+      padding: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <label for="firstNumber">First Number</label>
+  <input type="text" id="firstNumber"><br>
+
+  <label for="secondNumber">Second Number</label>
+  <input type="text" id="secondNumber"><br>
+
+  <button onclick="calculate('add')">Add</button>
+  <button onclick="calculate('subtract')">Sub</button>
+  <button onclick="calculate('divide')">Div</button>
+  <button onclick="calculate('multiply')">Mul</button>
+
+  <pre id="output"></pre>
+</div>
+
+<script>
+  function calculate(operation) {
+    const firstNumber = parseFloat(document.getElementById('firstNumber').value);
+    const secondNumber = parseFloat(document.getElementById('secondNumber').value);
+    const outputElement = document.getElementById('output');
+    let result;
+
+    if (isNaN(firstNumber) || isNaN(secondNumber)) {
+      outputElement.textContent = 'Please enter valid numbers.';
+      return;
+    }
+
+    switch (operation) {
+      case 'add':
+        result = firstNumber + secondNumber;
+        outputElement.textContent = "Addition: ${result}";
+        break;
+      case 'subtract':
+        result = firstNumber - secondNumber;
+        outputElement.textContent = "Subtraction: ${result}";
+        break;
+      case 'divide':
+        if (secondNumber === 0) {
+          outputElement.textContent = 'Cannot divide by zero.';
+        } else {
+          result = firstNumber / secondNumber;
+          outputElement.textContent = "Division: ${result}";
+        }
+        break;
+      case 'multiply':
+        result = firstNumber * secondNumber;
+        outputElement.textContent = "Multiplication: ${result}";
+        break;
+    }
+  }
+</script>
+
+</body>
+</html>
